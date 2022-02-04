@@ -17,7 +17,7 @@ function* deleteItem(action) {
 
     // Run the fetch
     yield put({
-      type: "FETCH_ITEM",
+      type: "GET_SHELF",
     });
   } catch (error) {
     console.log("User delete request failed", error);
@@ -25,7 +25,7 @@ function* deleteItem(action) {
 }
 
 function* deleteSaga() {
-  yield takeLatest("DELETE_ITEMS", deleteItem);
+  yield takeLatest("DELETE_ITEM", deleteItem);
 }
 
 export default deleteSaga;
