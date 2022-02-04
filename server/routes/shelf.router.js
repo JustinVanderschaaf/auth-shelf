@@ -28,6 +28,13 @@ router.post('/', (req, res) => {
  */
 router.delete('/:id', (req, res) => {
   // endpoint functionality
+  const queryText = 'DELETE FROM item WHERE id=$1';
+  pool.query(queryText, [req.params.id])
+    .then(() => { res.sendStatus(200); })
+    .catch((err) => {
+      console.log('Error completing SELECT item query', err);
+      res.sendStatus(500);
+    });
 });
 
 /**
