@@ -4,6 +4,7 @@ const router = express.Router();
 
 router.post('/', (req, res, next) => {
     console.log('req.body is', req.body);
+    const item = req.body.itemToAdd
 
     const queryText = `
         INSERT INTO "item"(description, image_url, user_id)
@@ -11,9 +12,9 @@ router.post('/', (req, res, next) => {
     `;
 
     const queryParams = [
-        req.body.description,
-        req.body.image_url,
-        req.body.user_id
+        item.description,
+        item.image_url,
+        item.user_id
     ]
 
     pool
