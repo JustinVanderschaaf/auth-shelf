@@ -1,6 +1,14 @@
 import React from 'react';
+import {useDispatch} from 'react-redux';
+import { useEffect } from 'react';
 
 function ShelfPage() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch({
+      type: 'GET_SHELF'
+    })
+  }, []);
   return (
     <div className="container">
       <h2>Shelf</h2>
