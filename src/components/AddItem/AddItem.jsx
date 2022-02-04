@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import {useSelector} from 'react-redux';
-import axios from "axios";
+import {useSelector, useDispatch} from 'react-redux';
 
-function AddItem (props) {
+function AddItem () {
 
+    const dispatch = useDispatch();
     const user = useSelector((store) => store.user);
     const [description, setDescription] = useState('');
     const [image, setImage] = useState('');
@@ -18,9 +18,11 @@ function AddItem (props) {
         evt.preventDefault();
         console.log('itemToAdd is:', itemToAdd);
     
-        axios.post('/api/add', { itemToAdd })
-            // .then(() => fetchItems())
-            .catch(err => console.error(err));
+        dispatch({ 
+            type: 'ADD_ITEM',
+            payload: itemToAdd
+        });
+    
     };
 
     return (
@@ -34,7 +36,7 @@ function AddItem (props) {
                     onChange={evt => setDescription(evt.target.value)}
                 />
                 <br></br>
-                <label htmlFor='iamge'>Image URL</label>
+                <label htmlFor='image'>Image URL</label>
                 <br></br>
                 <input
                     value={image}

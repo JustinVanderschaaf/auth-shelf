@@ -1,10 +1,13 @@
-const express = require('express');
-const pool = require('../modules/pool');
-const router = express.Router();
 
-router.post('/', (req, res, next) => {
+const express = require('express');
+const router = express.Router();
+const {
+    rejectUnauthenticated,
+} = require('../modules/authentication-middleware');
+const pool = require('../modules/pool');
+
+router.post('/', rejectUnauthenticated, (req, res) => {
     console.log('req.body is', req.body);
-    const item = req.body.itemToAdd
 
     const queryText = `
         INSERT INTO "item"(description, image_url, user_id)
@@ -12,9 +15,9 @@ router.post('/', (req, res, next) => {
     `;
 
     const queryParams = [
-        item.description,
-        item.image_url,
-        item.user_id
+        req.body.description,
+        req.body.image_url,
+        req.body.user_id
     ]
 
     pool
