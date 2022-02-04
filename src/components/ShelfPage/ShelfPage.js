@@ -6,7 +6,8 @@ import { useEffect } from "react";
 function ShelfPage() {
   const dispatch = useDispatch();
   const shelf = useSelector((store) => store.shelfReducer);
-  console.log(shelf, "***********is shelf");
+  const user = useSelector((store) => store.user);
+  console.log(user, "***********is user");
   useEffect(() => {
     dispatch({
       type: "GET_SHELF",
@@ -17,7 +18,7 @@ function ShelfPage() {
       <ul>
         {shelf.map((item) => (
           <li>
-            {item.description} <img src={item.image_url} /> <Delete itemId ={item.id}/>{" "}
+            {item.description} <img src={item.image_url} /> {user.id === item.user_id && <Delete itemId ={item.id}/>}
           </li>
         ))}
       </ul>

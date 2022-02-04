@@ -28,8 +28,9 @@ router.post('/', (req, res) => {
  */
 router.delete('/:id', (req, res) => {
   // endpoint functionality
-  const queryText = 'DELETE FROM item WHERE id=$1';
-  pool.query(queryText, [req.params.id])
+  console.log(req.user);
+  const queryText = 'DELETE FROM item WHERE id=$1 AND user_id=$2';
+  pool.query(queryText, [req.params.id, req.user.id])
     .then(() => { res.sendStatus(200); })
     .catch((err) => {
       console.log('Error completing SELECT item query', err);
