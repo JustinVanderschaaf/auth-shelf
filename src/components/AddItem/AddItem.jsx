@@ -1,3 +1,5 @@
+
+
 import React, { useState } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 
@@ -28,21 +30,22 @@ function AddItem () {
     return (
         <div>
             <h2>Add Item to Shelf</h2>
-            <form onSubmit={onAddItem}>
+            <form  action="/api/add" method="post" encType="multipart/form-data" >
                 <label htmlFor='description'>Description</label>
                 <br></br>
                 <input
                     value={description}
                     onChange={evt => setDescription(evt.target.value)}
                 />
-                <br></br>
+                {/* <br></br>
                 <label htmlFor='image'>Image URL</label>
                 <br></br>
                 <input
                     value={image}
                     onChange={evt => setImage(evt.target.value)}
-                />
+                /> */}
                 <br></br>
+                <input type="file" name="avatar" />
                 <button>Add Item</button>
             </form> 
         </div>
