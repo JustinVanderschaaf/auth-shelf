@@ -1,10 +1,10 @@
 import { all } from 'redux-saga/effects';
-import loginSaga from './login.saga';
-import registrationSaga from './registration.saga';
-import userSaga from './user.saga';
-import deleteSaga from './delete.saga';
-import addSaga from './add.saga';
-import getShelfSaga from './shelf.saga'
+// import loginSaga from './login.saga';
+// import registrationSaga from './registration.saga';
+// import userSaga from './user.saga';
+// import deleteSaga from './delete.saga';
+import uploadSaga from './upload.saga';
+// import getShelfSaga from './shelf.saga'
 
 
 
@@ -17,11 +17,11 @@ import getShelfSaga from './shelf.saga'
 // and login triggers setting the user
 export default function* rootSaga() {
   yield all([
-    loginSaga(), // login saga is now registered
-    registrationSaga(),
-    userSaga(),
-    deleteSaga(),
-    addSaga(),
-    getShelfSaga(),
+    // loginSaga(), // login saga is now registered
+    // registrationSaga(),
+    // userSaga(),
+    // deleteSaga(),
+    uploadSaga(),
+    // getShelfSaga(),
   ]);
 }

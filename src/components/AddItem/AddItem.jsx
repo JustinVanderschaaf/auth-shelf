@@ -1,52 +1,36 @@
 
-
 import React, { useState } from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 function AddItem () {
 
     const dispatch = useDispatch();
-    const user = useSelector((store) => store.user);
-    const [description, setDescription] = useState('');
-    const [image, setImage] = useState('');
+    const [fileData, setFileData] = useState();
 
-    const itemToAdd = {
-        description: description,
-        image_url: image,
-        user_id: user.id
+    const fileChangeHandler = (evt) => {
+        setFileData(evt.target.files[0])
     }
 
-    const onAddItem = (evt) => {
+    const onSubmitHandler = (evt) => {
         evt.preventDefault();
-        console.log('itemToAdd is:', itemToAdd);
-    
-        dispatch({ 
-            type: 'ADD_ITEM',
-            payload: itemToAdd
-        });
-    
-    };
+
+        const data = new FormData();
+
+        data.append('image', fileData)
+
+        dispatch({
+            type:'UPLOAD',
+            payload: data
+        })
+    }
 
     return (
         <div>
-            <h2>Add Item to Shelf</h2>
-            <form  action="/api/add" method="post" encType="multipart/form-data" >
-                <label htmlFor='description'>Description</label>
+            <h2>Image Upload</h2>
+            <form  onSubmit={onSubmitHandler} >
                 <br></br>
-                <input
-                    value={description}
-                    onChange={evt => setDescription(evt.target.value)}
-                />
-                {/* <br></br>
-                <label htmlFor='image'>Image URL</label>
-                <br></br>
-                <input
-                    value={image}
-                    onChange={evt => setImage(evt.target.value)}
-                /> */}
-                <br></br>
-                <input type="file" name="avatar" />
-                <button>Add Item</button>
+                <input type="file" onChange={fileChangeHandler}/>
+                <button type="submit">Submit</button>
             </form> 
         </div>
     );
